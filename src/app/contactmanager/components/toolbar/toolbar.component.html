@@ -1,1 +1,8 @@
-<p>toolbar works!</p>
+<mat-toolbar color="primary">
+  <button 
+    *ngIf="isScreenSmall"
+    type="button" mat-button (click)="toggleSidenav.emit()">
+    <mat-icon>menu</mat-icon>
+  </button> 
+  <span>Contact Manager</span>
+</mat-toolbar>

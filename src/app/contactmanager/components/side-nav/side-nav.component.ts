@@ -1,3 +1,4 @@
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  public isScreenSmall = false;
+
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
+    this.breakpointObserver
+      //.observe([`(max-width: 720px)`])      
+      .observe([ Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        this.isScreenSmall = state.matches;
+      });
   }
 
 }
