@@ -1,5 +1,8 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -10,7 +13,13 @@ export class SideNavComponent implements OnInit {
 
   public isScreenSmall = false;
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  users: Observable<User[]>;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private userService: UserService) {
+    this.users = this.userService.users;
+  }
 
   ngOnInit(): void {
     this.breakpointObserver
@@ -19,6 +28,13 @@ export class SideNavComponent implements OnInit {
       .subscribe((state: BreakpointState) => {
         this.isScreenSmall = state.matches;
       });
+
+      this.users = this.userService.users;
+      this.userService.loadAll();
+
+      this.users.subscribe( data => {
+        console.log(data);
+      })
   }
 
 }
