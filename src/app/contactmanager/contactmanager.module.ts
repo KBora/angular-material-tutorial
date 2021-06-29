@@ -10,6 +10,7 @@ import { MaterialModule } from '../shared/material.module';
 import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { NotesComponent } from './components/notes/notes.component';
 
 const routes: Routes = [
   { 
@@ -32,7 +33,8 @@ const routes: Routes = [
     ContactmanagerAppComponent,
     ToolbarComponent,
     MainContentComponent,
-    SideNavComponent
+    SideNavComponent,
+    NotesComponent
   ],
   imports: [
     CommonModule,
