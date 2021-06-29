@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 
@@ -19,8 +20,15 @@ export class MainContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = params['id'];
-      this.user = this.userService.userById(+id);
+      let id = params['id'];
+      if (!id) id = 1;
+   
+      this.userService.users
+        .pipe(filter(data => data.length > 0))
+        .subscribe(users => {
+          this.user = this.userService.userById(+id);
+        })
+      
     })
   }
 

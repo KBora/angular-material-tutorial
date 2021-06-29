@@ -23,7 +23,7 @@ export class UserService {
     return this._users.asObservable();
   }
 
-  userById(id: number) {
+  userById(id: number): User | undefined {
     return this.dataStore.users.find( user => user.id === id);
   }
 
