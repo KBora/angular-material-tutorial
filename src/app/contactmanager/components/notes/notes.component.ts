@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Note } from '../../models/note';
 
@@ -17,7 +18,8 @@ export class NotesComponent implements OnInit, AfterViewInit {
   dataSource!: MatTableDataSource<Note>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  @ViewChild(MatSort) sort!: MatSort;
+  
   constructor() { 
   }
 
@@ -31,6 +33,7 @@ export class NotesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
