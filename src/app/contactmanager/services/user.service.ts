@@ -13,7 +13,7 @@ export class UserService {
   private dataStore: {
     users: User[];
   }
-  
+
   constructor(private http: HttpClient) {
     this.dataStore = { users: [] };
     this._users = new BehaviorSubject<User[]>([]);
@@ -24,19 +24,32 @@ export class UserService {
   }
 
   userById(id: number): User | undefined {
-    return this.dataStore.users.find( user => user.id === id);
+    return this.dataStore.users.find(user => user.id === id);
   }
 
   loadAll() {
     const usersUrl = 'https://angular-material-api.azurewebsites.net/users';
 
     return this.http.get<User[]>(usersUrl)
-      .subscribe( data => {
+      .subscribe(data => {
         this.dataStore.users = data;
         this._users.next(Object.assign({}, this.dataStore).users);
       }, error => {
         console.log('Failed to fetch offers');
       })
+  }
+
+  addUser(user: User) {
+    return new Promise((resolve, reject) => {
+      try {
+        user.id = this.dataStore.users.length + 1;
+        this.dataStore.users.push(user);
+        this._users.next(Object.assign({}, this.dataStore).users);
+        resolve(user);
+      } catch (e) {
+        reject('Error');
+      }
+    });
   }
 
 
