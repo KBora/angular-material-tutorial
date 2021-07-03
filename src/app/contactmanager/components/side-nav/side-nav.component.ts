@@ -16,6 +16,7 @@ export class SideNavComponent implements OnInit {
   public isScreenSmall = false;
 
   users: Observable<User[]>;
+  isDarkTheme = false;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -26,7 +27,12 @@ export class SideNavComponent implements OnInit {
   }
 
   @ViewChild(MatSidenav)
+
   sidenav!: MatSidenav;
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
   
   ngOnInit(): void {
     this.breakpointObserver
