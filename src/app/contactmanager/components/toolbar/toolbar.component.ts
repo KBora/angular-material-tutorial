@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
   @Input() isScreenSmall = false;
   
   @Output() toggleSidenav = new EventEmitter<void>();
-  
+
   constructor(
     private dialog: MatDialog, 
     private snackBar: MatSnackBar,
@@ -36,7 +36,7 @@ export class ToolbarComponent implements OnInit {
         let snackBarRef = this.openSnackBar('User created', 'Open user');
 
         snackBarRef.onAction().subscribe(() => {          
-          this.router.navigate(['/contactmanager', { id: this.userIdToRedirectTo }]);
+          this.router.navigate(['/contactmanager', this.userIdToRedirectTo ]);
           console.log('hello');
           snackBarRef.dismiss();
         });
