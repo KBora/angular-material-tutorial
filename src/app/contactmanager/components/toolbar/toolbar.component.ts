@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
 
 @Component({
@@ -12,7 +14,12 @@ export class ToolbarComponent implements OnInit {
   
   @Output() toggleSidenav = new EventEmitter<void>();
   
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog, 
+    private snackBar: MatSnackBar,
+    private router: Router) { }
+
+  userIdToRedirectTo = 1;
 
   ngOnInit(): void {
   }
@@ -24,7 +31,23 @@ export class ToolbarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-    });     
+      if (result) {
+        this.userIdToRedirectTo = result.id;
+        let snackBarRef = this.openSnackBar('User created', 'Open user');
+
+        snackBarRef.onAction().subscribe(() => {          
+          this.router.navigate(['/contactmanager', { id: this.userIdToRedirectTo }]);
+          console.log('hello');
+          snackBarRef.dismiss();
+        });
+        
+       }
+    });
   }
+  
+  openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar> {
+    return this.snackBar.open(message, action);    
+  }
+
 
 }
