@@ -1,5 +1,8 @@
 
-<mat-sidenav-container class="app-sidenav-container" [class.dark-theme]="isDarkTheme">
+<mat-sidenav-container 
+class="app-sidenav-container" 
+[class.dark-theme]="isDarkTheme"
+[dir]="direction">
   <mat-sidenav 
     [opened]="!isScreenSmall"
     [mode]="isScreenSmall ? 'over' : 'side'"    
@@ -20,6 +23,7 @@
     <app-toolbar 
       [isScreenSmall]="isScreenSmall"
       (toggleTheme)="toggleTheme()"
+      (toggleDirection)="toggleDirection()"
       (toggleSidenav)="sidenav.toggle()"
     >
     </app-toolbar>

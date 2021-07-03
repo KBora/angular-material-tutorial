@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import { filter } from 'rxjs/operators';
+
 import { MatSidenav } from '@angular/material/sidenav';
+import { Direction } from '@angular/cdk/bidi/directionality';
+
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
@@ -17,6 +19,7 @@ export class SideNavComponent implements OnInit {
 
   users: Observable<User[]>;
   isDarkTheme = false;
+  direction: Direction = 'ltr';
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -32,6 +35,10 @@ export class SideNavComponent implements OnInit {
 
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
+  }
+  
+  toggleDirection() {
+    this.direction = this.direction  == 'ltr' ? 'rtl' : 'ltr';
   }
   
   ngOnInit(): void {
