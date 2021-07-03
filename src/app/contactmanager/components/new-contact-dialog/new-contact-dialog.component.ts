@@ -17,18 +17,18 @@ export class NewContactDialogComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<NewContactDialogComponent>) { }
 
-  userName = new FormControl('', [Validators.required, ]);
+  userName = new FormControl('', [Validators.required,]);
 
   getErrorMessage() {
-    return this.userName.hasError('required') ? 'Please enter a name' : '';
+    return this.userName.hasError("required") ? 'Please enter a name' : '';
   }
 
   ngOnInit(): void {
-    this.user = { name: '', id: 0, birthDate: new Date(), bio: '', avatar: '', notes: []};
+    this.user = { name: '', id: 0, birthDate: new Date(), bio: '', avatar: '', notes: [] };
   }
 
   save() {
-    this.user.name = this.userName.value;
+    this.user.name = this.userName.value; 
     this.dialogRef.close(this.user);
   }
 

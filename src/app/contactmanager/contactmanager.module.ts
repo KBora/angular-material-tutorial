@@ -12,6 +12,7 @@ import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NotesComponent } from './components/notes/notes.component';
 import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 const routes: Routes = [
   { 
@@ -48,7 +49,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   providers: [
-    UserService
+    UserService,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-AU' },
   ]
 })
 export class ContactmanagerModule { }

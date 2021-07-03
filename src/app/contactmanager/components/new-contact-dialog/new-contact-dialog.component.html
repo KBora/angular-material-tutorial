@@ -3,7 +3,7 @@
 </h2>
 
 <mat-dialog-content>
-  
+
   <mat-form-field appearance="fill">
     <mat-label>Avatar</mat-label>
     <mat-select [(ngModel)]="user.avatar">
@@ -12,10 +12,10 @@
       </mat-select-trigger>
       <mat-option *ngFor="let avatar of avatars" [value]="avatar">
         <mat-icon svgIcon="{{avatar}}"></mat-icon> {{avatar}}
-      </mat-option>      
+      </mat-option>
     </mat-select>
   </mat-form-field>
-    
+
   <br>
 
   <mat-form-field appearance="fill">
@@ -25,6 +25,13 @@
   </mat-form-field>
 
   <br>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Date of birth</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="user.birthDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
 
   <mat-form-field appearance="fill">
     <mat-label>Bio</mat-label>

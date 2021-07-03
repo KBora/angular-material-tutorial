@@ -1,0 +1,6 @@
+{
+  "workbench.editor.highlightModifiedTabs": true,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
+}
